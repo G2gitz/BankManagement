@@ -254,9 +254,9 @@ public class Main extends Application {
     //for verifying the if th pin is correct or not
     private boolean verifyPIN(String accountNumber, String enteredPIN) {
         try {
-            String url = "jdbc:mysql://localhost:3306/javafxmini";
-            String user = "root";
-            String password = "Mksql@123";
+            String url = "datbaseurl";
+            String user = "username";
+            String password = "password";
             connection = DriverManager.getConnection(url, user, password);
 
             String selectQuery = "SELECT * FROM users WHERE account_number = ? AND pin = ?";
