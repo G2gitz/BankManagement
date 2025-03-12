@@ -10,7 +10,12 @@ import javafx.stage.Stage;
 import java.sql.*;
 
 public class Main extends Application {
-    private Connection connection; // for database connection
+    private Connection connection;
+
+    String Myurl = "jdbc:mysql://localhost:3306/javafxmini";
+    String Myuser = "root";
+    String Mypassword = "Mksql@123";
+    // for database connection
     public static void main(String[] args) {  
         launch(args);
     }
@@ -127,9 +132,9 @@ public class Main extends Application {
     //for create new account
     private void createAccount(String name, double initialAmount) {
         try {
-            String url = "datbaseurl";
-            String user = "username";
-            String password = "password";
+            String url = Myurl;
+            String user = Myuser;
+            String password = Mypassword;
             connection = DriverManager.getConnection(url, user, password);
             String insertQuery = "INSERT INTO users (name, account_number, pin, balance) VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
@@ -160,9 +165,9 @@ public class Main extends Application {
     //for deposit money
     private void deposit(String accountNumber, double amount) {
         try {
-            String url = "datbaseurl";
-            String user = "username";
-            String password = "password";
+            String url = Myurl;
+            String user = Myuser;
+            String password = Mypassword;
             connection = DriverManager.getConnection(url, user, password);
 
             String depositQuery = "UPDATE users SET balance = balance + ? WHERE account_number = ?";
@@ -191,9 +196,9 @@ public class Main extends Application {
     //for withdraw money
     private void withdraw(String accountNumber, double amount) {
         try {
-            String url = "datbaseurl";
-            String user = "username";
-            String password = "password";
+            String url = Myurl;
+            String user = Myuser;
+            String password = Mypassword;
             connection = DriverManager.getConnection(url, user, password);
 
             String withdrawQuery = "UPDATE users SET balance = balance - ? WHERE account_number = ? AND balance >= ?";
@@ -223,9 +228,9 @@ public class Main extends Application {
     //for checking balance
     private void checkBalance(String accountNumber) {
         try {
-            String url = "datbaseurl";
-            String user = "username";
-            String password = "password";
+            String url = Myurl;
+            String user = Myuser;
+            String password = Mypassword;
             connection = DriverManager.getConnection(url, user, password);
 
             String selectQuery = "SELECT balance FROM users WHERE account_number = ?";
@@ -235,7 +240,7 @@ public class Main extends Application {
 
             if (resultSet.next()) {
                 double balance = resultSet.getDouble("balance");
-                showAlert(Alert.AlertType.INFORMATION, "Balance", "Balance: $" + balance);
+                showAlert(Alert.AlertType.INFORMATION, "Balance", "Balance: ₹" + balance);
             } else {
                 showAlert(Alert.AlertType.ERROR, "Error", "Account not found!");
             }
@@ -254,9 +259,9 @@ public class Main extends Application {
     //for verifying the if th pin is correct or not
     private boolean verifyPIN(String accountNumber, String enteredPIN) {
         try {
-            String url = "datbaseurl";
-            String user = "username";
-            String password = "password";
+            String url = Myurl;
+            String user = Myuser;
+            String password = Mypassword;
             connection = DriverManager.getConnection(url, user, password);
 
             String selectQuery = "SELECT * FROM users WHERE account_number = ? AND pin = ?";
@@ -400,9 +405,9 @@ public class Main extends Application {
         StringBuilder userDetails = new StringBuilder();
     
         try {
-            String url = "datbaseurl";
-            String user = "username";
-            String password = "password";
+            String url = Myurl;
+            String user = Myuser;
+            String password = Mypassword;
             connection = DriverManager.getConnection(url, user, password);
     
             String selectQuery = "SELECT name, account_number, balance FROM users WHERE account_number = ?";
@@ -417,7 +422,7 @@ public class Main extends Application {
     
                 userDetails.append("Name: ").append(name).append("\n");
                 userDetails.append("Account Number: ").append(accNumber).append("\n");
-                userDetails.append("Balance: $").append(balance);
+                userDetails.append("Balance: ₹").append(balance);
             } else {
                 userDetails.append("User details not found.");
             }
