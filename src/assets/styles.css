@@ -1,0 +1,18 @@
+.root {
+    -fx-background-color: #f4f4f4; /* Background color */
+}
+
+.label {
+    -fx-text-fill: #333333; /* Label text color */
+    -fx-font-size: 14px;
+}
+
+.button {
+    -fx-background-color: #3498db; /* Button background */
+    -fx-text-fill: white; /* Button text color */
+    -fx-font-size: 14px;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9; /* Darker blue on hover */
+}

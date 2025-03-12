@@ -3,10 +3,13 @@ package like;
 import java.util.Random;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 import java.sql.*;
 
 public class Main extends Application {
@@ -15,18 +18,21 @@ public class Main extends Application {
     String Myurl = "jdbc:mysql://localhost:3306/javafxmini";
     String Myuser = "root";
     String Mypassword = "Mksql@123";
-    // for database connection
     public static void main(String[] args) {  
         launch(args);
     }
-    Scene scene;  // for use main scene in other screens
+
+    Scene scene;
+
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Banking App");
+        primaryStage.setTitle("Bank Management");
+
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(20, 20, 20, 20));
         grid.setVgap(10);
         grid.setHgap(10);
+        grid.setAlignment(Pos.CENTER);
 
         Label nameLabel = new Label("Name:");
         GridPane.setConstraints(nameLabel, 0, 0);
@@ -37,6 +43,7 @@ public class Main extends Application {
         GridPane.setConstraints(amountLabel, 0, 1);
         TextField amountInput = new TextField();
         GridPane.setConstraints(amountInput, 1, 1);
+
 
         Button createAccountButton = new Button("Create Account");
         GridPane.setConstraints(createAccountButton, 0, 2);
@@ -78,7 +85,10 @@ public class Main extends Application {
         //adding all components to scene
         grid.getChildren().addAll(nameLabel, nameInput, amountLabel, amountInput, createAccountButton,depositButton, withdrawButton, checkBalanceButton,exitButton,showDetailsButton);
 
-        scene = new Scene(grid, 400, 250);
+        scene = new Scene(grid, 1024, 724);
+        scene.getStylesheets().add(getClass().getResource("/assets/styles.css").toExternalForm());
+        Image icon = new Image(getClass().getResourceAsStream("/assets/bank.png"));
+        primaryStage.getIcons().add(icon);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
